@@ -1,3 +1,8 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Global background & text colors */
+body {
+  @apply bg-navyBlue text-pureWhite;
+}
