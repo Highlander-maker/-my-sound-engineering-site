@@ -1,5 +1,6 @@
 "use client";
 import { useState, useEffect, useRef } from "react";
+import Image from "next/image";
 import { workData } from "./workData";
 import Modal from "react-modal";
 
@@ -117,9 +118,11 @@ export default function Work() {
                         className="relative cursor-pointer group overflow-hidden rounded-lg shadow-lg transition hover:scale-105 bg-gray-800 p-6"
                         onClick={() => setSelectedWork(project)}
                       >
-                        <img
+                        <Image
                           src={project.mainImage}
                           alt={project.title}
+                          width={800} // Adjust dimensions as needed
+                          height={500}
                           className="rounded-lg mb-4 w-full h-64 object-cover"
                         />
                         <h3 className="text-xl font-semibold text-celticGreen">
@@ -175,11 +178,13 @@ export default function Work() {
               )}
 
               {selectedWork.additionalImages?.map((image, index) => (
-                <img
+                <Image
                   key={index}
                   src={image}
-                  className="rounded-lg w-full max-h-[250px] object-cover"
                   alt={`Additional Image ${index + 1}`}
+                  width={800}
+                  height={500}
+                  className="rounded-lg w-full max-h-[250px] object-cover"
                 />
               ))}
             </div>
