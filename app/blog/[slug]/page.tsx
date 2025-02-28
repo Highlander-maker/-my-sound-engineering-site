@@ -1,6 +1,11 @@
 import { notFound } from "next/navigation";
 
-export default function BlogPost({ params }: { params: Awaited<Promise<{ slug: string }>> }) {
+// ✅ Corrected Type for Next.js 15+
+interface BlogPageProps {
+  params: { slug: string };
+}
+
+export default function BlogPost({ params }: BlogPageProps) {
   if (!params?.slug) {
     return notFound();
   }
