@@ -50,8 +50,7 @@ export default function Home() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.3, duration: 1 }}
       >
-        Elevating live performances with precision, passion, and expert sound
-        design. Dedicated to delivering{" "}
+        Elevating live performances with precision, passion, Dedicated to delivering{" "}
         <span className="text-celticGreen font-bold">flawless</span> sound,
         ensuring every project exceeds expectations.
       </motion.p>
