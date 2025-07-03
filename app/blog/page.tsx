@@ -1,25 +1,40 @@
-"use client";
-import { motion } from "framer-motion";
+import Link from "next/link";
+import fs from "fs";
+import path from "path";
 
-export default function Blog() {
+export default async function BlogIndex() {
+  const postsDir = path.join(process.cwd(), "app", "blog", "posts");
+  const slugs = fs
+    .readdirSync(postsDir)
+    .filter((file) => file.endsWith(".tsx"))
+    .map((file) => file.replace(/\.tsx$/, ""));
+
+  const blogPosts = await Promise.all(
+    slugs.map(async (slug) => {
+      const mod = await import(`./posts/${slug}.tsx`);
+      return {
+        slug,
+        ...mod.meta, // get title, date, description from meta export
+      };
+    })
+  );
+
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center text-center p-6">
-      <motion.h1
-        className="text-5xl font-extrabold text-white"
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1 }}
-      >
-        Blog
-      </motion.h1>
-      <motion.p
-        className="mt-4 text-lg text-gray-300"
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.3, duration: 1 }}
-      >
-        Exciting content is on the way. Stay tuned!
-      </motion.p>
+    <div className="max-w-3xl mx-auto px-6 py-12 text-white">
+      <h1 className="text-4xl font-bold text-celticGreen mb-8">Blog</h1>
+      <div className="space-y-8">
+        {blogPosts.map((post) => (
+          <Link
+            key={post.slug}
+            href={`/blog/${post.slug}`}
+            className="block border border-gray-700 rounded-lg p-6 hover:border-celticGreen transition"
+          >
+            <h2 className="text-2xl font-semibold text-celticGreen">{post.title}</h2>
+            <p className="text-sm text-gray-400 mb-2">{post.date}</p>
+            <p className="text-gray-300">{post.description}</p>
+          </Link>
+        ))}
+      </div>
     </div>
   );
 }
