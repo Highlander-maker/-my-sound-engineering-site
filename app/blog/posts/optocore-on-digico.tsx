@@ -1,10 +1,4 @@
-export const metadata = {
-  title: "What is DiGiCo Optocore?",
-  description: "A beginner’s overview of DiGiCo Optocore and how it connects consoles and racks.",
-  date: "2025-07-04"
-};
-
-export default function DigicoOptocorePage() {
+const DigicoOptocorePost = () => {
   return (
     <div className="max-w-3xl mx-auto px-6 py-16 text-white leading-relaxed">
       <h1 className="text-5xl font-extrabold text-celticGreen mb-8">
@@ -109,4 +103,6 @@ export default function DigicoOptocorePage() {
       </section>
     </div>
   );
-}
+};
+
+export default DigicoOptocorePost;
