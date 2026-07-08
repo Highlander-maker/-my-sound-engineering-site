@@ -1,17 +1,60 @@
+import type { Metadata } from "next";
+import Availability from "@/components/Availability";
+
+export const metadata: Metadata = {
+  title: "Contact",
+  description:
+    "Book Highlander Audio for system engineering, RF coordination, monitors or corporate AV — UK and worldwide.",
+};
+
+const channels = [
+  { label: "Email", value: "highlander1952@protonmail.com", href: "mailto:highlander1952@protonmail.com" },
+  { label: "Web", value: "highlanderaudio.com", href: "https://highlanderaudio.com" },
+  { label: "Based", value: "Ireland / UK · touring worldwide", href: undefined },
+];
+
 export default function Contact() {
-    return (
-      <div className="min-h-screen flex flex-col items-center justify-center text-center p-6">
-        <h1 className="text-4xl font-bold text-white">Get in Touch</h1>
-        <p className="mt-4 text-lg text-gray-300">Click below to send me an email.</p>
-        
+  return (
+    <div className="pt-16 min-h-screen">
+      <div className="mx-auto max-w-container px-5 sm:px-8 py-24 sm:py-32">
+        <p className="eyebrow mb-6">Contact</p>
+        <h1 className="display text-5xl sm:text-8xl max-w-4xl">
+          Got a show that needs to
+          <span className="text-tungsten"> sound right?</span>
+        </h1>
+        <p className="mt-8 max-w-xl text-lg text-muted leading-relaxed">
+          Festivals, arenas, stadiums, corporate rooms — system tech, RF,
+          monitors or full production support. Tell me the dates and the rig and
+          I’ll come straight back to you.
+        </p>
+
         <a
-          href="https://mail.google.com/mail/?view=cm&fs=1&to=rob.mccourty@gmail.com&su=Let's Work Together&body=Hi Rob, I’d like to discuss a sound engineering project with you."
-          target="_blank"
-          rel="noopener noreferrer"
-          className="mt-6 inline-block bg-blue-500 hover:bg-blue-600 text-white font-semibold py-3 px-6 rounded-lg transition"
+          href="mailto:highlander1952@protonmail.com?subject=Show%20enquiry"
+          className="inline-flex items-center gap-2 mt-12 rounded-full bg-bone px-8 py-4 text-ink font-medium hover:bg-tungsten transition-colors"
         >
-          Send an Email
+          Send an enquiry <span aria-hidden>→</span>
         </a>
+
+        <dl className="mt-20 grid sm:grid-cols-3 gap-px bg-line border border-line rounded-2xl overflow-hidden">
+          {channels.map((c) => (
+            <div key={c.label} className="bg-ink p-8">
+              <dt className="eyebrow mb-3">{c.label}</dt>
+              <dd className="text-lg">
+                {c.href ? (
+                  <a href={c.href} className="link-underline pb-1 hover:text-tungsten transition-colors">
+                    {c.value}
+                  </a>
+                ) : (
+                  c.value
+                )}
+              </dd>
+            </div>
+          ))}
+        </dl>
       </div>
-    );
-  }
+
+      {/* Renders only once CALENDAR_ICS_URL is configured */}
+      <Availability />
+    </div>
+  );
+}

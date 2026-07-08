@@ -1,11 +1,36 @@
-import Link from "next/link";
-import Image from "next/image";
+import type { Metadata } from "next";
+import { Space_Grotesk, Inter } from "next/font/google";
+import Nav from "@/components/Nav";
+import Footer from "@/components/Footer";
 import "./globals.css";
 
-export const metadata = {
-  title: "HighlanderAudio | Live Sound Engineering",
+const display = Space_Grotesk({
+  subsets: ["latin"],
+  variable: "--font-display",
+  weight: ["500", "600", "700"],
+});
+
+const body = Inter({
+  subsets: ["latin"],
+  variable: "--font-body",
+});
+
+export const metadata: Metadata = {
+  title: {
+    default: "Highlander Audio — Live Sound System & RF Engineering",
+    template: "%s — Highlander Audio",
+  },
   description:
-    "Professional live sound engineering and audio production portfolio.",
+    "Highlander Audio — freelance system engineer, RF coordinator and monitor engineer for the UK & international festival, arena and corporate touring circuit.",
+  metadataBase: new URL("https://highlanderaudio.com"),
+  openGraph: {
+    title: "Highlander Audio — Live Sound System & RF Engineering",
+    description:
+      "System engineering, RF coordination and monitor world for festivals, arenas and corporate shows worldwide.",
+    url: "https://highlanderaudio.com",
+    siteName: "Highlander Audio",
+    type: "website",
+  },
 };
 
 export default function RootLayout({
@@ -14,63 +39,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body className="bg-charcoalGray text-ashGray">
-        <header className="p-4 bg-charcoalGray shadow-md">
-          <nav className="container mx-auto flex justify-between items-center">
-            {/* Logo + Title (clickable home) */}
-            <Link
-              href="/"
-              className="flex items-center space-x-3 hover:opacity-90 transition"
-            >
-              <Image
-                src="/logo.png"
-                alt="HighlanderAudio Logo"
-                width={50}
-                height={25}
-                className="opacity-100"
-                priority
-              />
-              <h1 className="text-2xl font-bold text-celticGreen">
-                Highlander Audio
-              </h1>
-            </Link>
-
-            <ul className="flex gap-6">
-              <li>
-                <Link href="/" className="hover:text-celticGreen transition">
-                  Home
-                </Link>
-              </li>
-              <li>
-                <Link href="/services" className="hover:text-celticGreen transition">
-                  Services
-                </Link>
-              </li>
-              <li>
-                <Link href="/work" className="hover:text-celticGreen transition">
-                  Work
-                </Link>
-              </li>
-              <li>
-                <Link href="/blog" className="hover:text-celticGreen transition">
-                  Blog
-                </Link>
-              </li>
-              <li>
-                <Link href="/contact" className="hover:text-celticGreen transition">
-                  Contact
-                </Link>
-              </li>
-            </ul>
-          </nav>
-        </header>
-
-        <main className="container mx-auto p-6">{children}</main>
-
-        <footer className="p-4 bg-charcoalGray text-center">
-          <p>© 2025 Highlander Audio. All rights reserved.</p>
-        </footer>
+    <html lang="en" className={`${display.variable} ${body.variable}`}>
+      <body>
+        <Nav />
+        <main className="relative z-10 min-h-screen">{children}</main>
+        <Footer />
       </body>
     </html>
   );

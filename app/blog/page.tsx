@@ -1,6 +1,12 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 
-// Define the shape of a blog post
+export const metadata: Metadata = {
+  title: "Journal",
+  description:
+    "Notes from the road — RF, system engineering and show-control write-ups from Highlander Audio.",
+};
+
 type BlogPostMeta = {
   slug: string;
   title: string;
@@ -8,33 +14,44 @@ type BlogPostMeta = {
   description: string;
 };
 
-// Manually defined blog posts (can be automated later)
 const blogPosts: BlogPostMeta[] = [
   {
     slug: "optocore-on-digico",
     title: "What is DiGiCo Optocore?",
     date: "2025-07-04",
-    description: "A beginner’s overview of DiGiCo Optocore and how it connects consoles and racks.",
+    description:
+      "A beginner’s overview of DiGiCo Optocore and how it connects consoles and racks.",
   },
-  // Add more blog posts here as needed
 ];
 
 export default function BlogIndex() {
   return (
-    <div className="max-w-3xl mx-auto px-6 py-12 text-white">
-      <h1 className="text-4xl font-bold text-celticGreen mb-8">Blog</h1>
-      <div className="space-y-8">
-        {blogPosts.map((post: BlogPostMeta) => (
-          <Link
-            key={post.slug}
-            href={`/blog/${post.slug}`}
-            className="block border border-gray-700 rounded-lg p-6 hover:border-celticGreen transition"
-          >
-            <h2 className="text-2xl font-semibold text-celticGreen">{post.title}</h2>
-            <p className="text-sm text-gray-400 mb-2">{post.date}</p>
-            <p className="text-gray-300">{post.description}</p>
-          </Link>
-        ))}
+    <div className="pt-16 min-h-screen">
+      <div className="mx-auto max-w-container px-5 sm:px-8 py-20">
+        <p className="eyebrow mb-5">Journal</p>
+        <h1 className="display text-5xl sm:text-7xl mb-14">
+          Notes from
+          <br />
+          the <span className="text-tungsten">road</span>.
+        </h1>
+
+        <div className="border-t border-line">
+          {blogPosts.map((post) => (
+            <Link
+              key={post.slug}
+              href={`/blog/${post.slug}`}
+              className="group block border-b border-line py-8 sm:py-10"
+            >
+              <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-2">
+                <h2 className="display text-2xl sm:text-4xl group-hover:text-tungsten transition-colors">
+                  {post.title}
+                </h2>
+                <span className="text-sm text-muted shrink-0">{post.date}</span>
+              </div>
+              <p className="mt-3 max-w-2xl text-muted">{post.description}</p>
+            </Link>
+          ))}
+        </div>
       </div>
     </div>
   );

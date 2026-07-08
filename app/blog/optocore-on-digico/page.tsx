@@ -8,8 +8,8 @@ export const metadata = {
 
 export default function DigicoOptocorePage() {
   return (
-    <div className="max-w-3xl mx-auto px-6 py-16 text-white leading-relaxed">
-      <h1 className="text-5xl font-extrabold text-celticGreen mb-8">
+    <div className="max-w-3xl mx-auto px-6 pt-28 pb-16 text-bone leading-relaxed">
+      <h1 className="text-5xl font-semibold font-display tracking-tight text-tungsten mb-8">
         🎛️ What is DiGiCo Optocore?
       </h1>
 
@@ -33,7 +33,7 @@ export default function DigicoOptocorePage() {
 
       {/* Section: Loop */}
       <section className="mb-14">
-        <h2 className="text-3xl font-bold text-celticGreen mb-4">
+        <h2 className="text-3xl font-bold text-tungsten mb-4">
           🔄 How the Loop (Redundant Ring) Works
         </h2>
 
@@ -53,7 +53,7 @@ export default function DigicoOptocorePage() {
 
       {/* Section: Devices */}
       <section className="mb-14">
-        <h2 className="text-3xl font-bold text-celticGreen mb-4">
+        <h2 className="text-3xl font-bold text-tungsten mb-4">
           🔌 Devices on the Loop: FX vs TP
         </h2>
 
@@ -79,7 +79,7 @@ export default function DigicoOptocorePage() {
 
       {/* Section: Live Use */}
       <section className="mb-14">
-        <h2 className="text-3xl font-bold text-celticGreen mb-4">
+        <h2 className="text-3xl font-bold text-tungsten mb-4">
           ⚡ Use‑Case Example: Live Concert Rig
         </h2>
 
@@ -98,7 +98,7 @@ export default function DigicoOptocorePage() {
 
       {/* Section: Summary */}
       <section>
-        <h2 className="text-3xl font-bold text-celticGreen mb-4">
+        <h2 className="text-3xl font-bold text-tungsten mb-4">
           🛠️ Why You Want Optocore
         </h2>
         <ul className="list-disc list-inside space-y-2 text-gray-300">

@@ -1,286 +1,255 @@
-"use client";
+import type { Metadata } from "next";
+import Link from "next/link";
+import Reveal from "@/components/Reveal";
 
-import { useMemo, useState } from "react";
-
-type Tone = "green" | "blue" | "amber";
-
-type Service = {
-  id: string;
-  title: string;
-  subtitle: string;
-  tags: { label: string; tone: Tone }[];
-  bullets: { text: string; tone: Tone }[];
-  details: {
-    overview: string;
-    includes: string[];
-    youProvide: string[];
-    deliverables: string[];
-    turnaround: string;
-    pricingNote: string;
-  };
+export const metadata: Metadata = {
+  title: "Services",
+  description:
+    "System engineering, RF coordination, monitors, corporate AV — plus remote advancing and showfile builds. Highlander Audio.",
 };
 
-export default function ServicesPage() {
-  const services: Service[] = useMemo(
-    () => [
-      {
-        id: "advancing",
-        title: "Remote Audio Advancing & Prep Support",
-        subtitle:
-          "Venue advancing, RF planning, patch checks, and tech notes — handled remotely.",
-        tags: [
-          { label: "Venue Advance", tone: "blue" },
-          { label: "RF Planning", tone: "green" },
-          { label: "Tech Notes", tone: "amber" },
-        ],
-        bullets: [
-          { text: "Audio advance with venues (audio scope)", tone: "blue" },
-          { text: "RF planning / coordination support", tone: "green" },
-          { text: "Input list + patch sanity checks", tone: "amber" },
-          { text: "Clear handover notes for show crew", tone: "blue" },
-        ],
-        details: {
-          overview:
-            "I provide remote audio advancing and technical prep support for production/audio companies and touring teams. The goal is simple: remove preventable show-day issues by locking the important details in advance.",
-          includes: [
-            "Venue comms & advance calls (audio scope)",
-            "Input list / stage plot review + corrections",
-            "Console & infrastructure compatibility checks",
-            "RF plan / coordination support (where applicable)",
-            "Practical tech notes for FOH/Mons/System techs",
-          ],
-          youProvide: [
-            "Rider or brief (or just ‘what the show is’)",
-            "Input list + stage plot (rough is fine)",
-            "Console/system info + any constraints",
-            "Venue contact details (if you have them)",
-          ],
-          deliverables: [
-            "Advance notes (PDF or email-ready)",
-            "Updated patch/input notes (if needed)",
-            "RF notes / coordination file (if applicable)",
-            "Clear ‘day-of-show’ handover summary",
-          ],
-          turnaround:
-            "Typically 24–72 hours depending on scope and show dates.",
-          pricingNote:
-            "Priced per-show or as extra support during peak weeks. Happy to quote after a quick brief.",
-        },
-      },
-      {
-        id: "showfiles",
-        title: "Showfile & Template Builds",
-        subtitle:
-          "Tour-ready templates and prep documentation so you land smoother on the day.",
-        tags: [
-          { label: "Console Templates", tone: "green" },
-          { label: "Workflow Setup", tone: "blue" },
-          { label: "Patch + Notes", tone: "amber" },
-        ],
-        bullets: [
-          { text: "DiGiCo / general workflow templates", tone: "green" },
-          { text: "Monitor/IEM layouts & labelling", tone: "blue" },
-          { text: "Snapshot / macro planning (where relevant)", tone: "amber" },
-          { text: "Exportable patch + workflow notes", tone: "blue" },
-        ],
-        details: {
-          overview:
-            "I can build clean, reusable showfile templates and prep documentation so you walk into the day with a proven workflow — especially useful when you’ve got multiple shows moving at once.",
-          includes: [
-            "Template/showfile structure",
-            "Channel layout + colour/label conventions",
-            "Snapshot/macro suggestions (where relevant)",
-            "Exportable patch notes",
-          ],
-          youProvide: [
-            "Preferred console + show type",
-            "Input list / typical patch",
-            "Any workflow preferences",
-          ],
-          deliverables: [
-            "Showfile/template (where possible)",
-            "PDF patch + workflow notes",
-          ],
-          turnaround: "Usually 2–5 days depending on complexity.",
-          pricingNote: "Quoted per template/project.",
-        },
-      },
+const onSite = [
+  {
+    n: "01",
+    title: "System Engineering",
+    body: "PA design, deployment and time alignment on d&b (ArrayCalc / R1) — measured with ARTA and SMAART for even coverage, barrier to back wall, indoor or open-air festival. Happy to fly L-Acoustics rigs too.",
+    tags: ["d&b design · ArrayCalc / R1", "ARTA & SMAART", "Can fly L-Acoustics"],
+  },
+  {
+    n: "02",
+    title: "RF Coordination",
+    body: "Clean, reliable radio for mics and IEMs across busy spectrum. Full coordination, deployment and show-time monitoring.",
+    tags: ["Shure Axient Digital", "Sennheiser EWDX / DG6000", "PSM1000 · SoundBase"],
+  },
+  {
+    n: "03",
+    title: "FOH & Monitor Mixing",
+    body: "Out front or at the side of stage. I mix FOH for bands and run a calm, confident monitor world — wedges or in-ears, large input counts and orchestra looms handled cleanly, with fast, tidy line checks.",
+    tags: ["DiGiCo SD5 / Quantum", "A&H dLive / SQ", "FOH & Mons"],
+  },
+  {
+    n: "04",
+    title: "Corporate AV & Show Control",
+    body: "Conferences, awards shows and hybrid events. Multi-presenter setups, auto-mix, timecode and automated show control that simply works.",
+    tags: ["Bitfocus Companion", "Timecode / OSC", "Hybrid events"],
+  },
+];
+
+const remote = [
+  {
+    title: "Remote Advancing & Prep Support",
+    body: "Venue advancing, RF planning, patch checks and clear tech notes — handled remotely so preventable show-day issues are locked out before you land. Priced per-show or as extra cover during peak weeks.",
+    points: [
+      "Venue comms & advance calls (audio scope)",
+      "Input list / stage plot review + corrections",
+      "RF plan & coordination support",
+      "Day-of-show handover summary",
     ],
-    []
-  );
+    turnaround: "24–72 hours",
+  },
+  {
+    title: "Showfile & Template Builds",
+    body: "Tour-ready console templates and prep documentation so you walk in with a proven workflow — especially useful when several shows are moving at once.",
+    points: [
+      "DiGiCo / general workflow templates",
+      "Monitor & IEM layouts + labelling",
+      "Snapshot / macro planning",
+      "Exportable patch + workflow notes",
+    ],
+    turnaround: "2–5 days",
+  },
+];
 
-  const [activeId, setActiveId] = useState<string>(
-    services[0]?.id ?? "advancing"
-  );
-  const active = services.find((s) => s.id === activeId) ?? services[0];
-
+export default function ServicesPage() {
   return (
-    <main className="container mx-auto px-4 py-10">
-      {/* Header */}
-      <div className="mb-8">
-        <h1 className="text-4xl font-extrabold tracking-tight text-ashGray">
-          Services
+    <div className="pt-16">
+      <header className="mx-auto max-w-container px-5 sm:px-8 py-20 sm:py-28">
+        <p className="eyebrow mb-5">What I do</p>
+        <h1 className="display text-5xl sm:text-7xl lg:text-8xl max-w-4xl">
+          Systems, RF and
+          <br />a <span className="text-tungsten">calm stage</span>.
         </h1>
-        <p className="mt-3 max-w-2xl text-base leading-relaxed text-ashGray/70">
-          Remote support and prep services built around real touring workflows —
-          designed to reduce show-day issues and take pressure off busy crews.
+        <p className="mt-8 max-w-xl text-lg text-muted leading-relaxed">
+          Freelance engineering for festivals, arenas, stadiums and corporate
+          rooms — on-site or advanced remotely to take pressure off busy crews.
         </p>
-      </div>
+      </header>
 
-      {/* Cards */}
-      <div className="grid gap-5 md:grid-cols-2">
-        {services.map((s) => {
-          const isActive = s.id === activeId;
-          return (
-            <button
-              key={s.id}
-              onClick={() => setActiveId(s.id)}
-              className={[
-                "group text-left rounded-2xl border transition overflow-hidden",
-                "bg-charcoalGray/40 border-ashGray/15 hover:border-ashGray/30 hover:bg-charcoalGray/45",
-                isActive ? "ring-2 ring-celticGreen/60" : "",
-              ].join(" ")}
-            >
-              {/* Header bar */}
-              <div className="px-5 pt-5 pb-4 bg-gradient-to-r from-charcoalGray/80 via-charcoalGray/50 to-charcoalGray/30">
-                <div>
-                  <h2 className="text-xl font-extrabold">
-                    <span className="text-celticGreen">{s.title}</span>
-                  </h2>
-                  <p className="mt-1 text-sm leading-relaxed text-ashGray/70">
-                    {s.subtitle}
-                  </p>
+      {/* On-site services */}
+      <section className="mx-auto max-w-container px-5 sm:px-8">
+        <div className="grid md:grid-cols-2 gap-px bg-line border border-line rounded-2xl overflow-hidden">
+          {onSite.map((s, i) => (
+            <Reveal key={s.n} delay={(i % 2) * 0.08}>
+              <div className="bg-ink h-full p-8 sm:p-10 hover:bg-ink2 transition-colors">
+                <div className="flex items-baseline gap-4">
+                  <span className="font-display text-tungsten text-sm">{s.n}</span>
+                  <h2 className="display text-2xl sm:text-3xl">{s.title}</h2>
                 </div>
-
-                {/* Tags */}
-                <div className="mt-4 flex flex-wrap gap-2">
+                <p className="mt-4 text-muted leading-relaxed">{s.body}</p>
+                <ul className="mt-6 flex flex-wrap gap-2">
                   {s.tags.map((t) => (
-                    <span key={t.label} className={badgeClass(t.tone)}>
-                      {t.label}
-                    </span>
-                  ))}
-                </div>
-              </div>
-
-              {/* Bullets */}
-              <div className="px-5 pb-5">
-                <ul className="mt-4 space-y-2 text-sm text-ashGray/75">
-                  {s.bullets.map((b) => (
-                    <li key={b.text} className="flex gap-3">
-                      <span className={dotClass(b.tone)} aria-hidden="true" />
-                      <span className="leading-relaxed">{b.text}</span>
+                    <li
+                      key={t}
+                      className="rounded-full border border-line px-3 py-1 text-xs text-muted"
+                    >
+                      {t}
                     </li>
                   ))}
                 </ul>
               </div>
-            </button>
-          );
-        })}
-      </div>
+            </Reveal>
+          ))}
+        </div>
+      </section>
 
-      {/* More services note */}
-      <div className="mt-6 rounded-2xl border border-ashGray/15 bg-charcoalGray/35 p-4">
-        <p className="text-sm text-ashGray/70">
-          Need something slightly different (festival shout systems, RF packs,
-          system notes)?{" "}
-          <span className="font-semibold text-celticGreen">
-            Just ask — I can tailor a prep pack to your workflow.
-          </span>
-        </p>
-      </div>
+      {/* Remote services */}
+      <section className="mx-auto max-w-container px-5 sm:px-8 py-24 sm:py-32">
+        <Reveal>
+          <p className="eyebrow mb-3">Can’t get me on-site?</p>
+          <h2 className="display text-4xl sm:text-5xl mb-12">Remote support</h2>
+        </Reveal>
+        <div className="grid md:grid-cols-2 gap-5">
+          {remote.map((s, i) => (
+            <Reveal key={s.title} delay={i * 0.1}>
+              <div className="h-full rounded-2xl border border-line bg-ink2 p-8 sm:p-10">
+                <h3 className="display text-2xl sm:text-3xl">{s.title}</h3>
+                <p className="mt-4 text-muted leading-relaxed">{s.body}</p>
+                <ul className="mt-6 space-y-2">
+                  {s.points.map((p) => (
+                    <li key={p} className="flex gap-3 text-sm text-bone/85">
+                      <span className="text-tungsten">→</span>
+                      {p}
+                    </li>
+                  ))}
+                </ul>
+                <p className="mt-6 text-sm text-muted">
+                  Typical turnaround{" "}
+                  <span className="text-bone">{s.turnaround}</span>
+                </p>
+              </div>
+            </Reveal>
+          ))}
+        </div>
+      </section>
 
-      {/* Details */}
-      {active && (
-        <section className="mt-10 rounded-2xl border border-ashGray/15 bg-charcoalGray/45 overflow-hidden">
-          <div className="px-6 py-5 bg-gradient-to-r from-charcoalGray/85 via-charcoalGray/55 to-charcoalGray/35">
-            <h3 className="text-2xl font-extrabold text-celticGreen">
-              {active.title}
-            </h3>
-            <p className="mt-2 max-w-3xl text-sm leading-relaxed text-ashGray/75">
-              {active.details.overview}
-            </p>
-          </div>
+      {/* Software & artists */}
+      <section className="mx-auto max-w-container px-5 sm:px-8 py-16 sm:py-24 border-t border-line">
+        <Reveal>
+          <p className="eyebrow mb-3">Beyond the desk</p>
+          <h2 className="display text-4xl sm:text-6xl max-w-3xl">
+            Building tools that put money back in{" "}
+            <span className="text-tungsten">artists’</span> hands.
+          </h2>
+          <p className="mt-8 max-w-2xl text-lg text-muted leading-relaxed">
+            I’ve spent my career on the road with grassroots and independent
+            acts, and I’ve seen up close how the live-music machine is stacked
+            against the people who actually make the music — ticketing
+            monopolies squeezing artists and fans alike. So I started learning
+            to code and building the tools I wished existed.
+          </p>
+        </Reveal>
 
-          <div className="p-6 grid gap-6 md:grid-cols-2">
-            <InfoBlock
-              title="What’s included"
-              items={active.details.includes}
-            />
-            <InfoBlock
-              title="What I need from you"
-              items={active.details.youProvide}
-            />
-            <InfoBlock
-              title="Deliverables"
-              items={active.details.deliverables}
-            />
-
-            <div className="rounded-2xl border border-ashGray/15 bg-charcoalGray/35 p-5">
-              <h4 className="text-base font-bold text-ashGray">
-                Turnaround & pricing
-              </h4>
-
-              <p className="mt-3 text-sm leading-relaxed text-ashGray/75">
-                <span className="font-semibold text-ashGray">Turnaround:</span>{" "}
-                {active.details.turnaround}
+        <div className="mt-12 grid lg:grid-cols-2 gap-5">
+          {/* Shoal */}
+          <Reveal>
+            <a
+              href="https://shoaltickets.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group flex h-full flex-col rounded-2xl border border-line bg-ink2 p-8 sm:p-10 hover:border-tungsten/40 transition-colors"
+            >
+              <div className="flex items-center justify-between">
+                <span className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.2em] text-tungsten">
+                  <span className="w-1.5 h-1.5 rounded-full bg-tungsten animate-pulse" />
+                  Live now
+                </span>
+                <span className="text-sm text-muted group-hover:text-bone transition-colors">
+                  shoaltickets.com ↗
+                </span>
+              </div>
+              <h3 className="display text-3xl mt-5">Shoal</h3>
+              <p className="mt-3 text-muted leading-relaxed">
+                Artist-first ticketing, built and live on-chain. The artist is
+                paid directly, pricing is fair and fixed, and the whole model is
+                designed to cut out scalpers and the Ticketmaster middleman — with
+                the bigger goal of resale royalties flowing back to the act. The
+                idea: alone, an artist is prey to the monopolies; banded together
+                on one platform, a shoal can’t be picked off.
               </p>
+              <ul className="mt-6 flex flex-wrap gap-2">
+                {["Direct artist payment", "Anti-scalping", "Fan-owned"].map((t) => (
+                  <li key={t} className="rounded-full border border-line px-3 py-1 text-xs text-muted">
+                    {t}
+                  </li>
+                ))}
+              </ul>
+            </a>
+          </Reveal>
 
-              <p className="mt-2 text-sm leading-relaxed text-ashGray/75">
-                <span className="font-semibold text-ashGray">Pricing:</span>{" "}
-                {active.details.pricingNote}
+          {/* Pipeline */}
+          <Reveal delay={0.1}>
+            <div className="flex h-full flex-col rounded-2xl border border-line bg-ink p-8 sm:p-10">
+              <span className="text-xs uppercase tracking-[0.2em] text-muted">
+                In the pipeline
+              </span>
+              <h3 className="display text-3xl mt-5">More on the way</h3>
+              <p className="mt-3 text-muted leading-relaxed">
+                Shoal is the first of several tools I’m building for artists and
+                live events — more in active development now. Same thread running
+                through all of it: give independent artists and the venues that
+                back them better technology and a bigger share of what they earn.
               </p>
+            </div>
+          </Reveal>
+        </div>
 
-              <div className="mt-5">
-                <a
+        {/* Consulting */}
+        <Reveal>
+          <div className="mt-5 rounded-2xl border border-line bg-ink2 p-8 sm:p-10">
+            <div className="grid lg:grid-cols-[2fr_1fr] gap-8 lg:items-center">
+              <div>
+                <p className="eyebrow mb-3">Consulting</p>
+                <h3 className="display text-2xl sm:text-3xl">
+                  Grassroots artist &amp; promoter consulting
+                </h3>
+                <p className="mt-4 text-muted leading-relaxed">
+                  Most people building tech for music have never loaded a truck.
+                  I’m a working touring engineer who knows artists, promoters and
+                  venues from the inside — so I can help grassroots acts and small
+                  venues get to grips with ticketing, direct-to-fan tools and new
+                  tech, and keep more of what they make. Practical, honest advice
+                  from someone who’s actually in the room.
+                </p>
+              </div>
+              <div className="lg:text-right">
+                <Link
                   href="/contact"
-                  className="inline-flex items-center justify-center rounded-xl bg-celticGreen px-6 py-3 text-sm font-bold text-charcoalGray hover:opacity-90"
+                  className="inline-flex items-center gap-2 rounded-full border border-bone/25 px-6 py-3 text-bone hover:bg-bone hover:text-ink transition-colors"
                 >
-                  Enquire via Contact →
-                </a>
+                  Talk it through <span aria-hidden>→</span>
+                </Link>
               </div>
             </div>
           </div>
-        </section>
-      )}
-    </main>
-  );
-}
+        </Reveal>
+      </section>
 
-function InfoBlock({ title, items }: { title: string; items: string[] }) {
-  return (
-    <div className="rounded-2xl border border-ashGray/15 bg-charcoalGray/35 p-5">
-      <h4 className="text-base font-bold text-ashGray">{title}</h4>
-      <ul className="mt-4 space-y-2 text-sm text-ashGray/75">
-        {items.map((i) => (
-          <li key={i} className="flex gap-3">
-            <span
-              className="mt-2 h-2.5 w-2.5 rounded-full bg-celticGreen/75"
-              aria-hidden="true"
-            />
-            <span className="leading-relaxed">{i}</span>
-          </li>
-        ))}
-      </ul>
+      {/* CTA */}
+      <section className="mx-auto max-w-container px-5 sm:px-8 pb-8">
+        <Reveal>
+          <div className="rounded-2xl border border-line bg-ink2 p-10 sm:p-16 text-center">
+            <h2 className="display text-3xl sm:text-5xl">
+              Tell me about the show.
+            </h2>
+            <Link
+              href="/contact"
+              className="inline-flex items-center gap-2 mt-8 rounded-full bg-bone px-8 py-4 text-ink font-medium hover:bg-tungsten transition-colors"
+            >
+              Get a quote <span aria-hidden>→</span>
+            </Link>
+          </div>
+        </Reveal>
+      </section>
     </div>
   );
-}
-
-function badgeClass(tone: Tone) {
-  const base =
-    "inline-flex items-center rounded-full border px-3 py-1 text-xs font-semibold tracking-wide";
-
-  if (tone === "green")
-    return `${base} border-celticGreen/35 bg-celticGreen/10 text-celticGreen`;
-
-  if (tone === "blue")
-    return `${base} border-celticGreen/15 bg-charcoalGray/60 text-ashGray/80`;
-
-  return `${base} border-ashGray/15 bg-charcoalGray/60 text-ashGray/80`;
-}
-
-function dotClass(tone: Tone) {
-  const base = "mt-2 h-2.5 w-2.5 rounded-full";
-  if (tone === "green") return `${base} bg-celticGreen`;
-  if (tone === "blue") return `${base} bg-celticGreen/60`;
-  return `${base} bg-celticGreen/35`;
 }

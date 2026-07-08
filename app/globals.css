@@ -2,7 +2,68 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Global background & text colors */
+:root {
+  color-scheme: dark;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
 body {
-  @apply bg-navyBlue text-pureWhite;
+  @apply bg-ink text-bone font-sans;
+  overflow-x: hidden;
+}
+
+/* Subtle film grain over the black — keeps large dark areas from looking flat. */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.04;
+  background-image: radial-gradient(rgba(255, 255, 255, 0.9) 1px, transparent 1px);
+  background-size: 3px 3px;
+}
+
+::selection {
+  background: #e9b44c;
+  color: #0b0b0d;
+}
+
+.eyebrow {
+  @apply text-xs uppercase tracking-[0.3em] text-muted font-sans;
+}
+
+.display {
+  @apply font-display font-semibold tracking-tightest leading-[0.92];
+}
+
+/* Link underline that draws in on hover */
+.link-underline {
+  background-image: linear-gradient(currentColor, currentColor);
+  background-size: 0% 1px;
+  background-repeat: no-repeat;
+  background-position: left bottom;
+  transition: background-size 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.link-underline:hover {
+  background-size: 100% 1px;
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
 }
