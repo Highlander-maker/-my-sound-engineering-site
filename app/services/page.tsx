@@ -11,9 +11,9 @@ export const metadata: Metadata = {
 const onSite = [
   {
     n: "01",
-    title: "System Engineering",
-    body: "PA design, deployment and time alignment on d&b (ArrayCalc / R1) — measured with ARTA and SMAART for even coverage, barrier to back wall, indoor or open-air festival. Happy to fly L-Acoustics rigs too.",
-    tags: ["d&b design · ArrayCalc / R1", "ARTA & SMAART", "Can fly L-Acoustics"],
+    title: "Control & System Engineering",
+    body: "Someone has to look after the mix engineers — that's me. I build and prep the system before a tour goes out, then run it show after show so FOH and monitors just work: PA design and time alignment on d&b (ArrayCalc / R1), measured with ARTA and SMAART, DiGiCo and Optocore control networks proven before doors open. The person on the desk shouldn't have to think about the kit — that's the job.",
+    tags: ["Control & prep", "d&b design · ArrayCalc / R1", "ARTA & SMAART"],
   },
   {
     n: "02",
@@ -24,7 +24,7 @@ const onSite = [
   {
     n: "03",
     title: "FOH & Monitor Mixing",
-    body: "Out front or at the side of stage. I mix FOH for bands and run a calm, confident monitor world — wedges or in-ears, large input counts and orchestra looms handled cleanly, with fast, tidy line checks.",
+    body: "Out front mixing the band, or holding a calm, confident monitor world at the side of stage — wedges or in-ears, large input counts and orchestra looms handled cleanly, with fast, tidy line checks. Increasingly where I want to spend more of my time.",
     tags: ["DiGiCo SD5 / Quantum", "A&H dLive / SQ", "FOH & Mons"],
   },
   {
@@ -66,12 +66,13 @@ export default function ServicesPage() {
       <header className="mx-auto max-w-container px-5 sm:px-8 py-20 sm:py-28">
         <p className="eyebrow mb-5">What I do</p>
         <h1 className="display text-5xl sm:text-7xl lg:text-8xl max-w-4xl">
-          Systems, RF and
-          <br />a <span className="text-tungsten">calm stage</span>.
+          Systems, RF, control
+          <br />and the <span className="text-tungsten">mix</span> itself.
         </h1>
         <p className="mt-8 max-w-xl text-lg text-muted leading-relaxed">
-          Freelance engineering for festivals, arenas, stadiums and corporate
-          rooms — on-site or advanced remotely to take pressure off busy crews.
+          Freelance engineering across the whole show — PA design, RF
+          coordination, show control and the mix itself — built and run to
+          a standard where nobody has to give the kit a second thought.
         </p>
       </header>
 
@@ -188,18 +189,25 @@ export default function ServicesPage() {
 
           {/* Pipeline */}
           <Reveal delay={0.1}>
-            <div className="flex h-full flex-col rounded-2xl border border-line bg-ink p-8 sm:p-10">
-              <span className="text-xs uppercase tracking-[0.2em] text-muted">
-                In the pipeline
-              </span>
-              <h3 className="display text-3xl mt-5">More on the way</h3>
+            <Link
+              href="/software"
+              className="group flex h-full flex-col rounded-2xl border border-line bg-ink p-8 sm:p-10 hover:border-tungsten/40 transition-colors"
+            >
+              <div className="flex items-center justify-between">
+                <span className="text-xs uppercase tracking-[0.2em] text-muted">
+                  In the pipeline
+                </span>
+                <span className="text-sm text-muted group-hover:text-bone transition-colors">
+                  See the build ↗
+                </span>
+              </div>
+              <h3 className="display text-3xl mt-5">SmARTA</h3>
               <p className="mt-3 text-muted leading-relaxed">
-                Shoal is the first of several tools I’m building for artists and
-                live events — more in active development now. Same thread running
-                through all of it: give independent artists and the venues that
-                back them better technology and a bigger share of what they earn.
+                A native macOS acoustic measurement app — built because I
+                loved ARTA and wanted it on Mac. Same thread running through
+                everything here: build the tool I wish existed.
               </p>
-            </div>
+            </Link>
           </Reveal>
         </div>
 

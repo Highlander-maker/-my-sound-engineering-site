@@ -12,10 +12,10 @@ export default function Footer() {
               sound <span className="text-tungsten">flawless.</span>
             </h2>
             <a
-              href="mailto:highlander1952@protonmail.com"
+              href="mailto:rab@highlanderaudio.com"
               className="link-underline inline-block mt-6 text-lg text-bone"
             >
-              highlander1952@protonmail.com
+              rab@highlanderaudio.com
             </a>
           </div>
 

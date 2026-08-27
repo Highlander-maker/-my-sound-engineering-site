@@ -16,3 +16,14 @@ export type Job = {
 };
 
 export type JobInput = Omit<Job, "id" | "createdAt">;
+
+export type BlogPost = {
+  slug: string;
+  title: string;
+  date: string; // human-readable, e.g. "18 Jul 2026"
+  description: string;
+  contentHtml: string; // hand-authored HTML body, rendered via dangerouslySetInnerHTML
+  createdAt: string; // ISO
+};
+
+export type BlogPostInput = Omit<BlogPost, "createdAt">;

@@ -8,7 +8,7 @@ export const metadata: Metadata = {
 };
 
 const channels = [
-  { label: "Email", value: "highlander1952@protonmail.com", href: "mailto:highlander1952@protonmail.com" },
+  { label: "Email", value: "rab@highlanderaudio.com", href: "mailto:rab@highlanderaudio.com" },
   { label: "Web", value: "highlanderaudio.com", href: "https://highlanderaudio.com" },
   { label: "Based", value: "Ireland / UK · touring worldwide", href: undefined },
 ];
@@ -29,7 +29,7 @@ export default function Contact() {
         </p>
 
         <a
-          href="mailto:highlander1952@protonmail.com?subject=Show%20enquiry"
+          href="mailto:rab@highlanderaudio.com?subject=Show%20enquiry"
           className="inline-flex items-center gap-2 mt-12 rounded-full bg-bone px-8 py-4 text-ink font-medium hover:bg-tungsten transition-colors"
         >
           Send an enquiry <span aria-hidden>→</span>
