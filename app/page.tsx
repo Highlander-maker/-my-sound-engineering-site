@@ -48,7 +48,7 @@ export default async function Home() {
     { k: `${yearsActive}+`, v: "Years touring" },
     { k: `${jobs.length}+`, v: "Shows & tours logged" },
     { k: `${countries}`, v: "Countries worked" },
-    { k: "FOH", v: "to systems — a true all-rounder" },
+    { k: "FOH", v: "to systems" },
   ];
 
   return (
@@ -76,13 +76,11 @@ export default async function Home() {
         <Reveal>
           <p className="eyebrow mb-8">The work</p>
           <h2 className="display text-3xl sm:text-5xl lg:text-6xl max-w-4xl">
-            I make big systems disappear — so the only thing anyone notices is
-            the <span className="text-tungsten">show</span>.
+            Live sound, done <span className="text-tungsten">properly</span>.
           </h2>
           <p className="mt-8 max-w-2xl text-lg text-muted leading-relaxed">
             From flying PA in arenas with Wigwam to systems, RF and —
-            increasingly — mixing bands out front at FOH. A solid all-rounder
-            heading deeper into the mix. Currently control tech &amp; RF on
+            increasingly — mixing bands out front at FOH. Currently control tech &amp; RF on
             Scissor Sisters, Summer 2026.
           </p>
         </Reveal>

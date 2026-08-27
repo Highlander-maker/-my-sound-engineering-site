@@ -1,9 +1,12 @@
 import "server-only";
-import { list, put } from "@vercel/blob";
+import { put } from "@vercel/blob";
+import { revalidateTag } from "next/cache";
+import { readJson, readJsonFresh } from "@/lib/blob-read";
 import type { Job, JobInput } from "@/lib/types";
 import { seedJobs } from "@/data/seed";
 
 const JOBS_PATH = "data/jobs.json";
+const JOBS_TAG = "jobs";
 
 function hasBlob() {
   return Boolean(process.env.BLOB_READ_WRITE_TOKEN);
@@ -14,18 +17,8 @@ function hasBlob() {
 // configured (e.g. local dev with no token) or the file doesn't exist yet.
 export async function getJobs(): Promise<Job[]> {
   if (!hasBlob()) return sortJobs(seedJobs);
-  try {
-    const { blobs } = await list({ prefix: JOBS_PATH });
-    const match = blobs.find((b) => b.pathname === JOBS_PATH);
-    if (!match) return sortJobs(seedJobs);
-    const res = await fetch(match.url, { cache: "no-store" });
-    if (!res.ok) return sortJobs(seedJobs);
-    const data = (await res.json()) as Job[];
-    return sortJobs(data);
-  } catch (err) {
-    console.error("getJobs: falling back to seed —", err);
-    return sortJobs(seedJobs);
-  }
+  const data = await readJson<Job[]>(JOBS_PATH, JOBS_TAG);
+  return sortJobs(data ?? seedJobs);
 }
 
 export async function getJob(id: string): Promise<Job | undefined> {
@@ -45,17 +38,21 @@ export async function saveJobs(jobs: Job[]): Promise<void> {
     allowOverwrite: true,
     cacheControlMaxAge: 0,
   });
+  // Drop the cached read straight away so /admin edits show up immediately
+  // instead of waiting out the hour.
+  revalidateTag(JOBS_TAG, "max");
 }
 
 // One-time convenience: if Blob has no jobs.json yet, seed it from the committed
 // data so the admin has something to edit. Safe to call repeatedly.
 export async function ensureSeeded(): Promise<Job[]> {
-  const { blobs } = await list({ prefix: JOBS_PATH });
-  if (!blobs.some((b) => b.pathname === JOBS_PATH)) {
-    await saveJobs(sortJobs(seedJobs));
-    return sortJobs(seedJobs);
+  const existing = await readJsonFresh<Job[]>(JOBS_PATH);
+  if (!existing) {
+    const seeded = sortJobs(seedJobs);
+    await saveJobs(seeded);
+    return seeded;
   }
-  return getJobs();
+  return sortJobs(existing);
 }
 
 export async function addJob(input: JobInput): Promise<Job> {
